@@ -15,10 +15,12 @@ if (process.env.NODE_ENV === "test") {
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("production"),
 
+  DATABASE_CLIENT: z.enum(["sqlite", "pg"]),
+
   DATABASE_URL: z.string(), // se pudesse ter um valor vazio, colocariamos .nullable() no final
 
   // Colocando um valor default em uma variável ela deixa de ser obrigatória
-  PORT: z.number().default(3333),
+  PORT: z.coerce.number().default(3333),
 });
 
 // Validando os dados
